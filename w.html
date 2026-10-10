@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>物理海洋学复习提纲</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --bg-soft: #1e293b;
+    --card: #1e293b;
+    --border: #334155;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --accent: #38bdf8;
+    --accent2: #4ade80;
+    --warm: #fbbf24;
+    --code-bg: #0b1220;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Segoe UI", "Microsoft YaHei", -apple-system, sans-serif;
+    background: linear-gradient(135deg, var(--bg) 0%, #1e1b4b 100%);
+    color: var(--text);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+  /* 顶部标题栏 */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  header h1 {
+    font-size: 20px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+  }
+  .search-box {
+    padding: 7px 14px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 14px;
+    width: 240px;
+    max-width: 50vw;
+  }
+  .search-box:focus { outline: none; border-color: var(--accent); }
+  .layout {
+    display: flex;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 24px;
+    padding: 24px 28px;
+  }
+  /* 侧边目录 */
+  aside {
+    flex: 0 0 240px;
+    position: sticky;
+    top: 72px;
+    align-self: start;
+    max-height: calc(100vh - 96px);
+    overflow-y: auto;
+    padding-right: 8px;
+  }
+  aside h3 {
+    font-size: 12px;
+    color: var(--text-dim);
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  aside ul { list-style: none; }
+  aside li { margin: 4px 0; }
+  aside a {
+    display: block;
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+    transition: all .15s;
+  }
+  aside a:hover {
+    color: var(--text);
+    background: rgba(255,255,255,0.05);
+    border-left-color: var(--accent);
+  }
+  aside a.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    background: rgba(56,189,248,0.08);
+  }
+  /* 主体内容 */
+  main { flex: 1; min-width: 0; }
+  section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 28px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  }
+  section h2 {
+    font-size: 22px;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  section h2 .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #0b1220;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 800;
+  }
+  section h3 {
+    color: var(--accent);
+    font-size: 16px;
+    margin: 18px 0 10px;
+    padding-left: 10px;
+    border-left: 3px solid var(--accent);
+  }
+  section h4 {
+    color: var(--accent2);
+    font-size: 14px;
+    margin: 12px 0 6px;
+  }
+  p { margin: 8px 0; color: var(--text); }
+  ul, ol { margin: 8px 0 8px 22px; }
+  li { margin: 4px 0; }
+  strong { color: var(--warm); }
+  code {
+    background: var(--code-bg);
+    color: var(--accent2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: "Consolas", "SF Mono", monospace;
+    font-size: 0.92em;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 12px 0;
+    overflow-x: auto;
+  }
+  pre code {
+    background: none;
+    color: #a5b3c8;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14px;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 9px 12px;
+    text-align: left;
+  }
+  th {
+    background: rgba(56,189,248,0.12);
+    color: var(--accent);
+    font-weight: 700;
+  }
+  tr:nth-child(even) td { background: rgba(255,255,255,0.025); }
+  blockquote {
+    border-left: 4px solid var(--warm);
+    background: rgba(251,191,36,0.08);
+    padding: 10px 16px;
+    margin: 14px 0;
+    border-radius: 0 8px 8px 0;
+    color: var(--text);
+  }
+  .note {
+    background: rgba(74,222,128,0.08);
+    border-left: 4px solid var(--accent2);
+    padding: 10px 16px;
+    margin: 14px 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+  }
+  /* 隐藏未匹配搜索的章节 */
+  .hidden-by-search { display: none !important; }
+  /* 响应式 */
+  @media (max-width: 900px) {
+    .layout { flex-direction: column; padding: 16px; }
+    aside {
+      position: relative; top: 0;
+      flex: none; max-height: none;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    section { padding: 18px 16px; }
+    header { padding: 12px 16px; }
+  }
+  /* 滚动条美化 */
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌊 物理海洋学复习提纲</h1>
+  <input type="text" class="search-box" id="search" placeholder="🔍 搜索关键词过滤章节…">
+</header>
+
+<div class="layout">
+  <aside>
+    <h3>目录导航</h3>
+    <ul id="toc">
+      <li><a href="#m1">模块1 · 海水物理性质</a></li>
+      <li><a href="#m2">模块2 · 海洋地理与地形</a></li>
+      <li><a href="#m3">模块3 · 垂直结构与层结</a></li>
+      <li><a href="#m4">模块4 · 基本方程与守恒律</a></li>
+      <li><a href="#m5">模块5 · 海气界面通量</a></li>
+      <li><a href="#m6">模块6 · 地转流与核心理论</a></li>
+      <li><a href="#m7">模块7 · 风生环流与水团</a></li>
+      <li><a href="#m8">模块8 · 热盐环流与MOC</a></li>
+      <li><a href="#m9">模块9 · 波浪潮汐中尺度</a></li>
+      <li><a href="#a1">附录A · 观测方法</a></li>
+      <li><a href="#a2">附录B · 公式速查</a></li>
+      <li><a href="#a3">附录C · 教材对比</a></li>
+      <li><a href="#a4">复习策略</a></li>
+    </ul>
+  </aside>
+
+  <main>
+    <blockquote>
+      基于 Talley《Descriptive Physical Oceanography》、Stewart、Mellor、Knauss、Pond &amp; Pickard、Open University 系列、Tomczak &amp; Godfrey、Williams &amp; Follows、Gill、Pedlosky 及国内《海洋科学导论》等主流教材的共性内容整理。
+      涵盖全球主流教材约 <strong>80% 的重复核心内容</strong>，按 9 大模块 + 4 个附录组织。
+    </blockquote>
+
+    <!-- 模块 1 -->
+    <section id="m1">
+      <h2><span class="num">1</span>海水的物理性质</h2>
+      <h3>1.1 三大基本要素</h3>
+      <table>
+        <tr><th>要素</th><th>符号</th><th>单位</th><th>测量方法</th></tr>
+        <tr><td>温度</td><td>T / θ</td><td>°C (ITS-90)</td><td>温度计、CTD、XBT</td></tr>
+        <tr><td>盐度</td><td>S</td><td>g·kg⁻¹ (PSS-78 → TEOS-10 绝对盐度 S_A)</td><td>电导率法、盐度计</td></tr>
+        <tr><td>压力</td><td>p</td><td>dbar (1 dbar ≈ 10⁴ Pa)</td><td>应变式/压电式传感器</td></tr>
+      </table>
+      <ul>
+        <li>世界大洋平均盐度 ≈ <strong>34.7 g/kg</strong></li>
+        <li>开放大洋盐度范围：约 33–38 g/kg</li>
+        <li>影响盐度的四大因素：蒸发、降水、河川径流、海冰冻融</li>
+      </ul>
+
+      <h3>1.2 海水状态方程（EOS）</h3>
+      <ul>
+        <li><strong>EOS-80</strong>（1980）：非线性，含 T、S、p 乘积项</li>
+        <li><strong>TEOS-10</strong>（2010）：以绝对盐度 S_A、保守温度 Θ 替代实用盐度/位温</li>
+      </ul>
+      <pre><code>ρ ≈ ρ₀ − α·ρ₀·(T−T₀) + β·ρ₀·(S−S₀)
+  α = 热膨胀系数（0°C ~5.3×10⁻⁵ K⁻¹；20°C ~2.6×10⁻⁴ K⁻¹）
+  β = 盐收缩系数（~7.4–7.9×10⁻⁴ kg·g⁻¹）</code></pre>
+
+      <h3>1.3 位温与位密</h3>
+      <ul>
+        <li><strong>位温 θ</strong>：海水绝热上升到海面所具有的温度（扣除压缩增温）</li>
+        <li><strong>位密 ρ_θ</strong>：位温对应密度，消除压力影响后用于比较不同深度的水团</li>
+        <li>常用等压面：σ_θ（0 dbar）、σ_2（2000 dbar）、σ_4（4000 dbar）</li>
+        <li>σ_t = ρ − 1000（kg·m⁻³）</li>
+      </ul>
+
+      <h3>1.4 其他物性</h3>
+      <ul>
+        <li>比热：约 3990 J·kg⁻¹·K⁻¹（远大于空气，海洋是热"惯性库"）</li>
+        <li>黏性：分子约 1×10⁻⁶ m²·s⁻¹，湍流黏性大 3–6 个量级</li>
+        <li>声速：约 1500 m·s⁻¹，随 T、S、p 增大；声学层析/SOFAR 声道</li>
+        <li>光：蓝光穿透最深；真光层约 100 m</li>
+      </ul>
+      <div class="note"><strong>考点</strong>：密度对 T、S 的非线性依赖、α 随温度增大、淡水 4°C 极大密度。</div>
+    </section>
+
+    <!-- 模块 2 -->
+    <section id="m2">
+      <h2><span class="num">2</span>海洋地理与海底地形</h2>
+      <h3>2.1 大洋划分</h3>
+      <ul>
+        <li>四大洋：太平洋、大西洋、印度洋、北冰洋（+ 南大洋，约 60°S 以南）</li>
+        <li>海陆分布：地表 71% 海洋；北半球 61% 水，南半球 81% 水</li>
+        <li>高程曲线：陆地平均 +840 m，洋底平均 −3800 m</li>
+      </ul>
+
+      <h3>2.2 海底地形分带</h3>
+      <table>
+        <tr><th>地形单元</th><th>深度范围</th><th>特征</th></tr>
+        <tr><td>大陆架</td><td>0–~130 m</td><td>坡度小、光照足、生物丰富</td></tr>
+        <tr><td>大陆坡</td><td>~130–~2000 m</td><td>坡度陡，海底峡谷发育</td></tr>
+        <tr><td>大陆隆</td><td>~2000–~4000 m</td><td>浊积扇</td></tr>
+        <tr><td>深海平原</td><td>&gt;4000 m</td><td>极平坦，远洋沉积</td></tr>
+        <tr><td>大洋中脊</td><td>全球连贯</td><td>海底扩张中心</td></tr>
+        <tr><td>海沟</td><td>6000–11000 m</td><td>俯冲带，最深马里亚纳 11034 m</td></tr>
+      </table>
+
+      <h3>2.3 测深方法</h3>
+      <ul>
+        <li>单波束回声测深、多波束（MBES）</li>
+        <li>侧扫声呐</li>
+        <li>卫星测高反演海底地形（重力–地形关系）</li>
+        <li>地震反射剖面（沉积层结构）</li>
+      </ul>
+    </section>
+
+    <!-- 模块 3 -->
+    <section id="m3">
+      <h2><span class="num">3</span>垂直结构与层结</h2>
+      <h3>3.1 上层海洋</h3>
+      <ul>
+        <li><strong>混合层（Mixed Layer）</strong>：风与浮力强迫下充分混合，全球平均深度约 50–100 m
+          <ul>
+            <li>形成机制：风搅拌 + 浮力耗散；Ekman 抽吸 / 混合层模式</li>
+          </ul>
+        </li>
+        <li><strong>季节性温跃层</strong>：夏季发育，冬季被卷回混合层</li>
+        <li><strong>主温跃层</strong>：几百米到 ~1000 m，永久性、连接表层与冷水层</li>
+      </ul>
+
+      <h3>3.2 跃层类型</h3>
+      <ul>
+        <li>温跃层（thermocline）：dT/dz 极大</li>
+        <li>盐跃层（halocline）：dS/dz 极大（如北冰洋淡表层下方）</li>
+        <li>密度跃层（pycnocline）：dρ/dz 极大；往往是温跃层和盐跃层共同贡献</li>
+      </ul>
+
+      <h3>3.3 深层</h3>
+      <ul>
+        <li>温度接近 0–4°C，盐度 34.6–34.8</li>
+        <li>来自高纬深水形成区，年龄由 CFC、C-14 示踪</li>
+      </ul>
+      <div class="note"><strong>复习要点</strong>：低纬度"三层结构"（混合层—温跃层—深层）；高纬度冬季深对流可达 2000 m。</div>
+    </section>
+
+    <!-- 模块 4 -->
+    <section id="m4">
+      <h2><span class="num">4</span>基本方程与守恒律</h2>
+      <h3>4.1 坐标系与近似</h3>
+      <ul>
+        <li>球坐标 → f 平面（f = const）→ β 平面（df/dy = β）</li>
+        <li>Boussinesq 近似：密度变化只在浮力项保留</li>
+        <li>静力近似：垂直动量方程 → 流体静力方程</li>
+      </ul>
+
+      <h3>4.2 三大守恒方程</h3>
+      <h4>1. 质量守恒（连续性方程）</h4>
+      <pre><code>∂u/∂x + ∂v/∂y + ∂w/∂z = 0    （不可压缩）</code></pre>
+      <h4>2. 动量方程（旋转坐标系 Navier-Stokes）</h4>
+      <pre><code>Du/Dt + 2Ω×u = −(1/ρ)∇p + ν∇²u + 其他
+  科氏项：f = 2Ω sinφ</code></pre>
+      <h4>3. 热量与盐量守恒</h4>
+      <pre><code>Dθ/Dt = κ_θ ∂²θ/∂z² + Q
+DS/Dt = κ_S ∂²S/∂z²</code></pre>
+
+      <h3>4.3 湍流与雷诺平均</h3>
+      <ul>
+        <li>分子黏性 ν ≈ 1×10⁻⁶ m²/s</li>
+        <li>湍流黏性 A_v ≈ 10⁻³–10⁻² m²/s（混合层）/ 10⁻⁵ m²/s（温跃层）</li>
+        <li>跨密度面扩散 κ ≈ 10⁻⁵ m²/s（大洋内）；10⁻⁴ m²/s（近地形粗糙区）</li>
+      </ul>
+      <div class="note"><strong>核心近似组合</strong>：静力 + Boussinesq + f/β 平面 = "原始方程"，几乎所有大洋环流模式的基础。</div>
+    </section>
+
+    <!-- 模块 5 -->
+    <section id="m5">
+      <h2><span class="num">5</span>海气界面通量</h2>
+      <h3>5.1 净热通量分解</h3>
+      <pre><code>Q = Q_s − Q_b − Q_h − Q_e + Q_v</code></pre>
+      <table>
+        <tr><th>项</th><th>含义</th><th>典型量级</th></tr>
+        <tr><td>Q_s</td><td>短波入射（吸收）</td><td>+50–250 W/m²</td></tr>
+        <tr><td>Q_b</td><td>长波回辐射</td><td>−50 W/m²</td></tr>
+        <tr><td>Q_h</td><td>感热通量（bulk 公式）</td><td>−10–25 W/m²</td></tr>
+        <tr><td>Q_e</td><td>潜热通量（蒸发）</td><td>−50–150 W/m²</td></tr>
+        <tr><td>Q_v</td><td>平流热输送余项</td><td>收支闭合</td></tr>
+      </table>
+      <ul>
+        <li>bulk 公式：Q_h = ρ_a c_p C_H U (T_s − T_a)</li>
+        <li>潜热：Q_e = ρ_a L_v C_E U (q_s − q_a)</li>
+      </ul>
+
+      <h3>5.2 风应力</h3>
+      <pre><code>τ = ρ_a C_D |U| U
+  ρ_a ≈ 1.2 kg/m³，C_D ≈ 1.0–1.5×10⁻³（随风速增大）
+  中性稳定、10 m 高处参考</code></pre>
+
+      <h3>5.3 淡水通量</h3>
+      <ul>
+        <li>E − P（蒸发 − 降水）</li>
+        <li>河川径流 R（侧边界输入）</li>
+        <li>海冰冻融（高纬）</li>
+      </ul>
+    </section>
+
+    <!-- 模块 6 -->
+    <section id="m6">
+      <h2><span class="num">6</span>地转流与动力海洋学核心理论</h2>
+      <h3>6.1 地转平衡（Geostrophy）</h3>
+      <ul>
+        <li>大尺度、低 Rossby 数下，科氏力 ≈ 压强梯度力：</li>
+      </ul>
+      <pre><code>f v = (1/ρ) ∂p/∂x ;  −f u = (1/ρ) ∂p/∂y
+  → 海流沿等压线流动，北半球右侧高压
+  → 由 T、S 计算相对地转流：热成风关系
+f ∂u/∂z = (g/ρ₀) ∂ρ/∂y ;  f ∂v/∂z = −(g/ρ₀) ∂ρ/∂x</code></pre>
+      <ul>
+        <li>水平速度参考面需用直接观测（如 LADCP、漂浮物）定零参考层</li>
+      </ul>
+
+      <h3>6.2 Ekman 理论</h3>
+      <ul>
+        <li>表层风驱动，忽略水平压强梯度：</li>
+        <li>表层流偏离风向 <strong>右 45°（北半球）/ 左 45°（南半球）</strong></li>
+        <li>深度增加，速度旋转衰减（Ekman 螺线）</li>
+        <li><strong>Ekman 输送</strong>：净输运方向 <strong>右偏 90°（NH）</strong></li>
+      </ul>
+      <pre><code>M_E = τ × k / (ρ f)</code></pre>
+      <ul>
+        <li><strong>Ekman 抽吸</strong> w_E = curl(τ)/(ρ f)：
+          <ul>
+            <li>正旋度（北半球气旋式风）→ 上升</li>
+            <li>负旋度（反气旋式风）→ 下降，影响主温跃层深度</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>6.3 Sverdrup 平衡</h3>
+      <pre><code>β V = curl τ / ρ
+  → curl τ 决定内区经向总输运方向
+  → 大洋东西尺度由 β/W 决定</code></pre>
+
+      <h3>6.4 西向强化（Stommel 1948）</h3>
+      <ul>
+        <li>β 效应要求内区经向输运向极/向赤道流动汇于西边界</li>
+        <li>西边界流窄而强（湾流、黑潮 ~1–2 m/s，宽 ~100 km）</li>
+        <li>Stommel 模型给出不对称解析解</li>
+      </ul>
+
+      <h3>6.5 涡度与位涡</h3>
+      <ul>
+        <li>绝对涡度：ζ + f</li>
+        <li><strong>位涡守恒</strong>：D[(ζ+f)/H]/Dt = 0（无摩擦、绝热）</li>
+        <li>行星涡度变化 → 相对涡度补偿：等深线流北上时产生反气旋式曲率</li>
+      </ul>
+    </section>
+
+    <!-- 模块 7 -->
+    <section id="m7">
+      <h2><span class="num">7</span>风生环流与水团</h2>
+      <h3>7.1 副热带环流圈</h3>
+      <ul>
+        <li>反气旋式风（信风 + 西风带）→ Ekman 下沉 → 主温跃层加深</li>
+        <li>"猪槽"（mode water）通风：十八年水（STMW）、亚热带模态水</li>
+        <li>西边界流回流系统构成闭合副热带环流</li>
+      </ul>
+
+      <h3>7.2 主要表层流系</h3>
+      <table>
+        <tr><th>流系</th><th>区域</th><th>特征</th></tr>
+        <tr><td>赤道流（南北赤道流）</td><td>5°N–5°S 两侧</td><td>西向，强而宽</td></tr>
+        <tr><td>赤道逆流（NECC/SECC）</td><td>5°–10°</td><td>东向，逆风</td></tr>
+        <tr><td>赤道潜流（EUC）</td><td>赤道 100–200 m</td><td>东向、强（&gt;1 m/s）</td></tr>
+        <tr><td>西边界流（湾流/黑潮/巴西/东澳）</td><td>西边界</td><td>窄、强、向极</td></tr>
+        <tr><td>南极绕极流（ACC）</td><td>50–60°S</td><td>唯一经向贯通，&gt;100 Sv</td></tr>
+      </table>
+
+      <h3>7.3 水团分析与 T-S 图</h3>
+      <ul>
+        <li>T-S 图上水团为固定特征点</li>
+        <li>中央水：副热带下沉扩散</li>
+        <li>亚极地水：副极地环流下沉</li>
+        <li>中层水：南极中层水 AAIW（~900 m）、北极中层水 NPIW、地中海水 MW</li>
+        <li>深层水：NADW（~2500 m）、南极底层水 AABW（&gt;4000 m）</li>
+        <li>等密度面分析（isopycnal analysis）追踪通风路径</li>
+      </ul>
+    </section>
+
+    <!-- 模块 8 -->
+    <section id="m8">
+      <h2><span class="num">8</span>热盐环流与经向翻转</h2>
+      <h3>8.1 深水形成区</h3>
+      <table>
+        <tr><th>水团</th><th>形成区</th><th>特征</th></tr>
+        <tr><td>NADW</td><td>北大西洋挪威海、格陵兰海</td><td>冷咸、~2–4°C</td></tr>
+        <tr><td>AABW</td><td>威德尔海、罗斯海</td><td>极冷、约 −1°C、盐度较高</td></tr>
+        <tr><td>AAIW</td><td>南极锋带下沉</td><td>低盐、富氧</td></tr>
+      </table>
+
+      <h3>8.2 全球传送带</h3>
+      <ul>
+        <li>Broecker（1991）"大洋传送带"示意</li>
+        <li>现代观点：多单元组合
+          <ul>
+            <li>大西洋经向翻转单元 AMOC</li>
+            <li>南大洋 ACC 连接三大洋</li>
+            <li>印太太平洋上涌至大西洋闭合</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>8.3 维持机制</h3>
+      <ul>
+        <li>深水形成 ≠ 热盐环流全部</li>
+        <li>跨密度面混合维持 NADW 上涌回流</li>
+        <li><strong>Munk（1966）一维平衡</strong>：w = κ ∂ρ/∂z</li>
+        <li>南大洋"残留环流"（residual circulation）：风驱动 + 浮力强迫 + 中尺度涡共同作用</li>
+      </ul>
+    </section>
+
+    <!-- 模块 9 -->
+    <section id="m9">
+      <h2><span class="num">9</span>波浪、潮汐与中尺度过程</h2>
+      <h3>9.1 表面重力波</h3>
+      <ul>
+        <li>色散关系：
+          <ul>
+            <li>深水：ω² = g k</li>
+            <li>浅水：ω² = g h k²（c = √(gh)）</li>
+          </ul>
+        </li>
+        <li>水质点轨迹：深水为圆，浅水为椭圆</li>
+        <li>有效波高 H_s：1/3 大波平均；统计符合 Rayleigh 分布</li>
+        <li>充分成长风浪 → 涌浪（远场传播）</li>
+      </ul>
+
+      <h3>9.2 内波与内潮</h3>
+      <ul>
+        <li>等密度面波动，振幅可达数十米</li>
+        <li>频率范围：N_min &lt; ω &lt; N（Brunt-Väisälä 频率）</li>
+        <li>内潮：潮汐地形散射产生，深海混合主要来源之一</li>
+      </ul>
+
+      <h3>9.3 行星波</h3>
+      <table>
+        <tr><th>波型</th><th>存在条件</th><th>性质</th></tr>
+        <tr><td>Kelvin 波</td><td>沿岸/赤道波导</td><td>沿边界右行（NH）、东向</td></tr>
+        <tr><td>Poincaré 波</td><td>旋转海洋</td><td>含旋转效应的重力波</td></tr>
+        <tr><td>Rossby 波</td><td>β &gt; 0</td><td>西向传播、调整大洋环流</td></tr>
+        <tr><td>赤道波</td><td>赤道波导</td><td>等效 Kelvin/Yanai/Rossby</td></tr>
+      </table>
+
+      <h3>9.4 潮汐</h3>
+      <ul>
+        <li><strong>平衡潮理论</strong>：牛顿/拉普拉斯，受天体引力 + 地月公转</li>
+        <li><strong>动力潮理论</strong>：拉普拉斯潮汐方程 + 海盆共振</li>
+        <li>三类：半日潮（M2, S2）、日潮（K1, O1）、混合潮</li>
+        <li>调和分析：分潮振幅/迟角 → 预报</li>
+        <li>强潮混合区：浅海、潮汐河口、海峡</li>
+      </ul>
+
+      <h3>9.5 海啸与风暴潮</h3>
+      <ul>
+        <li>海啸：长波（浅水波 c=√(gh)），跨洋速度约 700 km/h</li>
+        <li>风暴潮：低压 + 风把水推高，台风/飓风沿岸灾害</li>
+      </ul>
+
+      <h3>9.6 中尺度涡</h3>
+      <ul>
+        <li>罗斯比变形半径 L_R ≈ c/f ~ 10–100 km（中纬度）</li>
+        <li>涡动能（EKE）占大洋动能 90% 以上</li>
+        <li>地转湍流：能量级联从大尺度到次中尺度</li>
+      </ul>
+    </section>
+
+    <!-- 附录 A -->
+    <section id="a1">
+      <h2><span class="num">A</span>观测方法与仪器</h2>
+      <table>
+        <tr><th>类型</th><th>代表仪器</th><th>测量要素</th></tr>
+        <tr><td>走航剖面</td><td>CTD（电导率-温度-深度）、LADCP</td><td>T、S、u、v 剖面</td></tr>
+        <tr><td>投弃式</td><td>XBT、AXCTD</td><td>T 剖面（快速、低成本）</td></tr>
+        <tr><td>自由漂浮</td><td>Argo（2000 m 中性漂浮）</td><td>T、S 0–2000 m、全球覆盖</td></tr>
+        <tr><td>锚系</td><td>海床锚系、上浮系泊</td><td>长时间序列、深海</td></tr>
+        <tr><td>表层漂流</td><td>GPS 漂流浮标</td><td>表层流</td></tr>
+        <tr><td>流速剖面</td><td>船载 ADCP、锚系 RDI ADCP</td><td>u(z)</td></tr>
+        <tr><td>卫星</td><td>高度计（TOPEX/Jason）、SST、SeaWiFS、Scat</td><td>SSH、SST、叶绿素、风场</td></tr>
+        <tr><td>化学示踪</td><td>CFC-11/12、C-14、氚氦、He/Ne</td><td>水团年龄、输运路径</td></tr>
+        <tr><td>海底</td><td>多波束、侧扫声呐、地震反射</td><td>地形、沉积</td></tr>
+      </table>
+    </section>
+
+    <!-- 附录 B -->
+    <section id="a2">
+      <h2><span class="num">B</span>关键公式速查</h2>
+      <pre><code> 1. 状态方程      ρ = ρ(T, S, p)
+ 2. 位温          θ = T + Γ_d z（绝热修正）
+ 3. Brunt频率     N² = -(g/ρ)(dρ/dz)
+ 4. 科氏参数      f = 2Ω sinφ；β = (2Ω/R) cosφ
+ 5. 地转流        u_g = -(1/(ρf)) ∂p/∂y ;  v_g = (1/(ρf)) ∂p/∂x
+ 6. 热成风        f ∂u/∂z = (g/ρ₀) ∂ρ/∂y
+ 7. Ekman输运     M_E = (τ_x, τ_y) × k / (ρ f)
+ 8. Ekman抽吸     w_E = curl τ / (ρ f)
+ 9. Sverdrup      β V = curl τ / ρ
+10. 位涡守恒     PV = (ζ + f)/H = const
+11. 深水色散      c = √(gh)
+12. 浅水波速      c² = gh tanh(kh)/(kh)
+13. Rossby波速    c_R = -β / k²（长波）
+14. 风应力        τ = ρ_a C_D |U| U
+15. 净热通量      Q = Q_s − Q_b − Q_h − Q_e + Q_v
+16. Munk平衡     w = κ ∂²ρ/∂z²（一维热盐）</code></pre>
+    </section>
+
+    <!-- 附录 C -->
+    <section id="a3">
+      <h2><span class="num">C</span>教材差异对比</h2>
+      <table>
+        <tr><th>维度</th><th>描述侧重</th><th>动力推导</th><th>区域侧重</th><th>生物化学耦合</th><th>现代气候</th></tr>
+        <tr><td>Talley DPO6</td><td>★★★★★</td><td>★★★</td><td>全球</td><td>★</td><td>★★</td></tr>
+        <tr><td>Stewart</td><td>★★★★</td><td>★★</td><td>全球</td><td>★</td><td>★</td></tr>
+        <tr><td>Mellor</td><td>★★</td><td>★★★★★</td><td>理论</td><td>—</td><td>—</td></tr>
+        <tr><td>Knauss</td><td>★★★</td><td>★★★★</td><td>全球</td><td>★</td><td>—</td></tr>
+        <tr><td>Pond &amp; Pickard</td><td>★★</td><td>★★★★★</td><td>理论</td><td>—</td><td>—</td></tr>
+        <tr><td>Open University</td><td>★★★</td><td>★</td><td>全球</td><td>★</td><td>—</td></tr>
+        <tr><td>Tomczak &amp; Godfrey</td><td>★★★★</td><td>★★</td><td>区域</td><td>★</td><td>—</td></tr>
+        <tr><td>Williams &amp; Follows</td><td>★★</td><td>★★★</td><td>全球</td><td>★★★★★</td><td>★★★</td></tr>
+        <tr><td>Gill (A-O Dynamics)</td><td>★</td><td>★★★★★</td><td>GFD</td><td>★</td><td>—</td></tr>
+        <tr><td>Pedlosky (GFD)</td><td>—</td><td>★★★★★</td><td>纯理论</td><td>—</td><td>—</td></tr>
+        <tr><td>冯士筰《海洋科学导论》</td><td>★★★★</td><td>★★★</td><td>中国近海</td><td>★★</td><td>★</td></tr>
+      </table>
+      <h4>选书建议</h4>
+      <ul>
+        <li>本科入门 / 通识：Stewart、Open University、DPO6 前 8 章</li>
+        <li>研究生综合：DPO6 全本 + Williams &amp; Follows</li>
+        <li>偏动力学：Mellor / Pond &amp; Pickard / Gill</li>
+        <li>深入 GFD 理论：Pedlosky</li>
+        <li>区域海洋学：Tomczak &amp; Godfrey</li>
+      </ul>
+    </section>
+
+    <!-- 复习策略 -->
+    <section id="a4">
+      <h2><span class="num">✦</span>复习策略建议</h2>
+      <ol>
+        <li><strong>第一遍</strong>：按模块顺序通读，建立"性质 → 结构 → 方程 → 力学 → 环流 → 波浪潮汐"框架</li>
+        <li><strong>第二遍</strong>：把附录 B 公式逐条默写并理解物理意义</li>
+        <li><strong>第三遍</strong>：每模块画一张示意图（混合层结构、Ekman 螺线、传送带、T-S 图）</li>
+        <li><strong>冲刺</strong>：用附录 C 对照教材差异，找出自己教材未覆盖的盲点（如 Williams &amp; Follows 的碳循环内容）</li>
+        <li><strong>概念串联题</strong>：
+          <ul>
+            <li>为何湾流在西侧而东岸无强边界流？→ Sverdrup + Stommel</li>
+            <li>副热带主温跃层为何较深？→ Ekman 下沉通风</li>
+            <li>NADW 在哪里形成？如何回流到太平洋？→ 热盐 + 南大洋混合</li>
+          </ul>
+        </li>
+      </ol>
+      <blockquote>
+        整理依据：全球主流物理海洋学教材共 80% 重叠内容，参考 Talley DPO6、Stewart、Mellor、Knauss、Pond &amp; Pickard、Open University、Tomczak &amp; Godfrey、Williams &amp; Follows、Gill、Pedlosky 等目录与书评综合而成。
+      </blockquote>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // 目录高亮当前章节
+  const sections = document.querySelectorAll('section[id]');
+  const tocLinks = document.querySelectorAll('#toc a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        tocLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => observer.observe(s));
+
+  // 搜索过滤
+  const searchInput = document.getElementById('search');
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    sections.forEach(s => {
+      const text = s.textContent.toLowerCase();
+      const match = !q || text.includes(q);
+      s.classList.toggle('hidden-by-search', !match);
+    });
+    // 同步隐藏目录中无对应内容的链接
+    tocLinks.forEach(a => {
+      const id = a.getAttribute('href').slice(1);
+      const sec = document.getElementById(id);
+      const match = !q || (sec && sec.textContent.toLowerCase().includes(q));
+      a.parentElement.style.display = match ? '' : 'none';
+    });
+  });
+</script>
+
+</body>
+</html>
